@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/clock2.png</file>
+        <file>icons/clock0.png</file>
+        <file>icons/clock1.png</file>
+        <file>icons/clock3.png</file>
+        <file>icons/arrows.png</file>
+        <file>icons/arrows-2.png</file>
+        <file>icons/arrows-3.png</file>
+        <file>icons/arrows-4.png</file>
+        <file>icons/arrows-5.png</file>
+        <file>icons/arrows-6.png</file>
+        <file>icons/cut.png</file>
+        <file>icons/interface.png</file>
+        <file>icons/interface-1.png</file>
+        <file>icons/interface-2.png</file>
+        <file>icons/interface-3.png</file>
+        <file>icons/scissors.png</file>
+        <file>icons/search.png</file>
+        <file>icons/search-1.png</file>
+        <file>icons/orientationHorizontal.png</file>
+        <file>icons/orientationVertical.png</file>
+        <file>icons/new.jpg</file>
+        <file>icons/open.png</file>
+        <file>icons/ManuLab.jpg</file>
+    </qresource>
+</RCC>
