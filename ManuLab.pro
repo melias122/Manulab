@@ -41,7 +41,8 @@ SOURCES += main.cpp \
     ui/thumbnaillabel.cpp \
     ui/thumbnailslider.cpp \
     helpers/imagepool.cpp \
-    filter/distance.cpp
+    filter/distance.cpp \
+    filter/entropy.cpp
 
 HEADERS += \
     ui/mainwindow.h \
@@ -69,7 +70,8 @@ HEADERS += \
     ui/thumbnaillabel.h \
     ui/thumbnailslider.h \
     helpers/imagepool.h \
-    filter/distance.h
+    filter/distance.h \
+    filter/entropy.h
 
 FORMS +=    ui/mainwindow.ui \
 	    ui/newproject.ui

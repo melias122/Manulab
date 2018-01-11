@@ -8,6 +8,7 @@
 #include "filter/select.h"
 #include "filter/coincidenceindex.h"
 #include "filter/distance.h"
+#include "filter/entropy.h"
 
 #include "qjsondocument.h"
 #include "qjsonarray.h"
@@ -16,14 +17,15 @@
 template <typename filter> FilterInterface *newFilter() { return new filter; }
 
 QHash<QString, FilterFactory::NewFilter> FilterFactory::factory = {
-    {"Select", &newFilter<Select>},
+    {"Sub-selection", &newFilter<Select>},
     {"Page orientation", &newFilter<Orientation>},
     {"Substitution", &newFilter<Substitution>},
     {"Frequency", &newFilter<Frequency>},
 //	{"Reverse", &newFilter<Reverse>},
     {"IC", &newFilter<CoincidenceIndex>},
-    {"Search", &newFilter<Search>},
-    {"Distances", &newFilter<Distance>}
+    {"Pattern search", &newFilter<Search>},
+    {"Distances", &newFilter<Distance>},
+    {"Entropy", &newFilter<Entropy>}
 
 };
 
