@@ -20,11 +20,13 @@ Frequency::Frequency()
     le_file_path.setPlaceholderText("Path to the folder");
     btn_open_file_browser.setText("Open file browser");
     btn_export_data.setText("Export to csv");
+    btn_show_graph.setText("Show graph"); //new Button
 
     sort_asc = true;
 
     connect(&btn_export_data, &QPushButton::clicked, this, &Frequency::export_histogram);
     connect(&btn_open_file_browser, &QPushButton::clicked, this, &Frequency::open_file_browser);
+    connect(&btn_show_graph, &QPushButton::clicked, this, &Frequency::show_graph); //connect function, called after button press
     connect(header_view, &QHeaderView::sectionDoubleClicked, this, &Frequency::sort_by_colum);
 }
 
@@ -145,6 +147,7 @@ void Frequency::resultUi(QWidget *parent)
     main_layout.addWidget(&le_file_path, 1, 0, 1, 1);
     main_layout.addWidget(&btn_open_file_browser, 1, 1, 1, 1);
     main_layout.addWidget(&btn_export_data, 2, 0, 1, 2);
+    main_layout.addWidget(&btn_show_graph, 3, 0, 1, 2);//new button to layout
 
     dialog->setLayout(&main_layout);
     dialog->setWindowTitle("Histogram for the document");
@@ -208,7 +211,7 @@ void Frequency::resultUi(QWidget *parent)
         table.setItem(i, 1, itemAbs);
         table.setItem(i, 2, itemRel);
 
-        dialog->exec();
+        dialog->show();//exec to show
 //    }
 }
 
@@ -274,4 +277,82 @@ void Frequency::open_file_browser()
         le_file_path.setPalette(pallete);
         le_file_path.setText(dir);
     }
+}
+
+void Frequency::show_graph()//show graph function(definition)
+{
+    QScrollArea* scrollArea = new QScrollArea();
+    QWidget* widget = new Frequency::Graph(data);
+    scrollArea->setWidget(widget);
+    scrollArea->resize(scrollArea->width(), widget->height()+20);
+    scrollArea->setMinimumHeight(widget->height()+20);
+    scrollArea->setMaximumHeight(widget->height()+20);
+    scrollArea->show();
+    scrollArea->activateWindow();
+}
+
+
+Frequency::Graph::Graph(const QMap<QString, quint32>& data)//graph window
+    : barColor(Qt::green)
+    , data(data)
+    , max(0)
+{
+    this->resize(40+20*data.size(), 580);
+    if(!data.empty())
+    {
+        max = *std::max_element(data.begin(), data.end());
+    }
+}
+
+void Frequency::Graph::drawAxis(QPainter& painter)//graph axis
+{
+    painter.setBrush(QBrush(Qt::black));
+    if(!data.empty())
+    {
+        painter.drawLine(20, 10, 20, this->height()-10);
+        painter.drawLine(10, this->height()-20, this->width()-10, this->height()-20);
+        for(quint32 i = 0; i < 10; ++i)
+        {
+            int y = 10+570/10*i;
+            painter.drawLine(10, y, 30, y);
+            int value = ((float)max/10.0f)*(10.0f-(float)i);
+            QString valueStr = QString::number(value);
+            QRect textRect(0, y, 20, 20);
+            painter.drawText(textRect, valueStr);
+        }
+    }
+}
+
+void Frequency::Graph::drawBars(QPainter& painter)//graph bars
+{
+    painter.setBrush(QBrush(Qt::green));
+    int barWidth = 10;
+    int betweenBars = 10;
+    int i = 0;
+    for(const auto& val : data.toStdMap())
+    {
+        if(i%2)
+        {
+            painter.setBrush(QBrush(Qt::green));
+        }
+        else
+        {
+            painter.setBrush(QBrush(Qt::blue));
+        }
+        int height = ((float)val.second/(float)max)*((float)this->height()-(float)30);
+        int x = 2*betweenBars+i*(barWidth+betweenBars);
+        int y = this->height()-20-height;
+        QRect barRect(x, y, barWidth, height);
+        QRect textRect(x-5+(barWidth/2), this->height()-20, 20, 15);
+        painter.drawRect(barRect);
+        painter.drawText(textRect, val.first);
+        ++i;
+    }
+}
+
+void Frequency::Graph::paintEvent(QPaintEvent* /*event*/)//paint event
+{
+    QPainter painter(this);
+    drawAxis(painter);
+    drawBars(painter);
 }
