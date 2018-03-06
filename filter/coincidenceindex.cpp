@@ -1,6 +1,7 @@
 #include "coincidenceindex.h"
 
 #include <QWidget>
+#include <QHeaderView>
 #include <QDialog>
 #include <QVBoxLayout>
 #include <QTableWidget>
@@ -121,14 +122,18 @@ void CoincidenceIndex::resultUi(QWidget *parent)
 	table.setRowCount(IC_languages.count());
 	table.setColumnCount(columns_count);
 	table.setHorizontalHeaderLabels(QStringList() << "Language"
-							   << "IC"
-                               << "Absoult value");
+                               << "reference IC"
+                               << "L1 Distance");
 	// stretch the columns width to their content
 	table.resizeColumnsToContents();
 
 	// align the labels to left
-    for (int i = 0; i < columns_count; i++)
+    for (int i = 0; i < columns_count; i++){
 		table.horizontalHeaderItem(i)->setTextAlignment(Qt::AlignLeft);
+    }
+
+    QHeaderView* header = table.horizontalHeader();
+    header->setSectionResizeMode(QHeaderView::Stretch);
 
     qint32 i = 0;
 	// inserting data to table
@@ -158,7 +163,7 @@ void CoincidenceIndex::resultUi(QWidget *parent)
     label.setFont(font);
 
 	layout.addWidget(&label);
-    //layout.addWidget(&table);
+    layout.addWidget(&table);
 
 	dialog.setWindowTitle("Index of Coincidence");
 
