@@ -11,6 +11,8 @@
 #include "math.h"
 
 QString CoincidenceIndex::arg1 = "Delimitter";
+QString CoincidenceIndex::arg2 = "Threshold";
+
 
 CoincidenceIndex::CoincidenceIndex()
 {
@@ -28,10 +30,14 @@ CoincidenceIndex::CoincidenceIndex()
 
     argv[arg1] = "";
     delimitter = "";
+    argv[arg2] = "0.002";
+    delta = 0.002;
+
 }
 
 void CoincidenceIndex::setArgs(const Args &args)
 {
+     delta = args[arg2].toString().toFloat();
      delimitter = args[arg1].toString();
      FilterInterface::setArgs(args);
 }
@@ -42,6 +48,7 @@ void CoincidenceIndex::settingsUi(QWidget *parent)
 
     Args args = getArgs();
     dialog.addLineEdit(arg1, args[arg1]);
+    dialog.addLineEdit(arg2, args[arg2]);
 
     if (dialog.exec() == QDialog::Accepted) {
         setArgs(dialog.args);
@@ -145,12 +152,13 @@ void CoincidenceIndex::resultUi(QWidget *parent)
 		table.setItem(i, 2, new QTableWidgetItem(QString::number(match, 'g', 5)));
 
 		// coloring cells
-        if (match <= 0.002)
+        if (match <= delta) {
 			table.item(i, 2)->setBackgroundColor(Qt::green);
-        else if (match > 0.002 && match <= 0.005)
+        } else if (match > delta && match <= (2*delta)) {
 			table.item(i, 2)->setBackgroundColor(Qt::yellow);
-		else
+        } else {
 			table.item(i, 2)->setBackgroundColor(Qt::red);
+        }
 		i++;
 	}
 	// sort table rows by best match with documents actual coincidence index
