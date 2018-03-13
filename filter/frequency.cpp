@@ -296,20 +296,44 @@ Frequency::Graph::Graph(const QMap<QString, quint32>& data)//graph window
     : barColor(Qt::green)
     , data(data)
     , max(0)
-{
-    this->resize(40+20*data.size(), 580);
+
+{   int swap = 0;
+    int inc = 25;
+    int lenght = 0;
+    for(const auto& e : data.keys()) {
+
+              lenght = e.length();
+              if(swap < lenght){
+                  swap = lenght;
+              }
+}
+
+    qDebug() << swap;
+    if(swap >= 5)
+    {
+        inc = 37;
+    }
+    if(swap >= 7)
+    {
+        inc = 53;
+    }
+    if(swap >= 9)
+    {
+        inc = 82;
+    }
+
+    this->resize(inc*data.size(), 580);
     if(!data.empty())
     {
         max = *std::max_element(data.begin(), data.end());
-    }
-}
+    }}
 
 void Frequency::Graph::drawAxis(QPainter& painter)//graph axis
 {
     painter.setBrush(QBrush(Qt::black));
     if(!data.empty())
     {
-        painter.drawLine(20, 10, 20, this->height()-10);
+        painter.drawLine(30, 0, 30, this->height()-10);
         painter.drawLine(10, this->height()-20, this->width()-10, this->height()-20);
         for(quint32 i = 0; i < 10; ++i)
         {
@@ -317,8 +341,18 @@ void Frequency::Graph::drawAxis(QPainter& painter)//graph axis
             painter.drawLine(10, y, 30, y);
             int value = ((float)max/10.0f)*(10.0f-(float)i);
             QString valueStr = QString::number(value);
-            QRect textRect(0, y, 20, 20);
-            painter.drawText(textRect, valueStr);
+            int dlzka = valueStr.size();
+
+            if(dlzka > 4){
+            QRect textRect(0, y, dlzka*10, 20);
+            painter.drawText(textRect, valueStr);}
+            if(dlzka == 4){
+            QRect textRect(5, y, dlzka*10, 20);
+            painter.drawText(textRect, valueStr);}
+            if(dlzka <= 3){
+            QRect textRect(10, y, dlzka*10, 20);
+            painter.drawText(textRect, valueStr);}
+
         }
     }
 }
@@ -329,8 +363,21 @@ void Frequency::Graph::drawBars(QPainter& painter)//graph bars
     int barWidth = 10;
     int betweenBars = 10;
     int i = 0;
+    int swap = 0;
+    int lenght = 0;
+
+    for(const auto& e : data.keys()) {
+
+        lenght = e.length();
+        if(swap < lenght){
+            swap = lenght;
+        }}
+
+
     for(const auto& val : data.toStdMap())
     {
+        int space =0;
+        int spaceText = 0;
         if(i%2)
         {
             painter.setBrush(QBrush(Qt::green));
@@ -340,10 +387,27 @@ void Frequency::Graph::drawBars(QPainter& painter)//graph bars
             painter.setBrush(QBrush(Qt::blue));
         }
         int height = ((float)val.second/(float)max)*((float)this->height()-(float)30);
-        int x = 2*betweenBars+i*(barWidth+betweenBars);
         int y = this->height()-20-height;
-        QRect barRect(x, y, barWidth, height);
-        QRect textRect(x-5+(barWidth/2), this->height()-20, 20, 15);
+        if(swap>=5){
+             space = 15;
+             spaceText = 15;
+        }
+        if(swap>=7){
+             space = 30;
+             spaceText = 30;
+        }
+        if(swap>=9){
+             space = 60;
+             spaceText = 60;
+        }
+
+        int x = 2*betweenBars+i*(barWidth+betweenBars+space);
+
+
+
+        QRect barRect(x+10, y, barWidth, height);
+        QRect textRect(x+6+(barWidth/2), this->height()-20, 15 + spaceText, 15);
+
         painter.drawRect(barRect);
         painter.drawText(textRect, val.first);
         ++i;
