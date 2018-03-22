@@ -18,15 +18,25 @@ CoincidenceIndex::CoincidenceIndex()
 {
      uiFlag = UiFlag(result | settings);
     // https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
-	// known frequency distributions
 	// http://www.dcode.fr/index-coincidence
+    // http://alexbarter.com/statistics/index-of-coincidence/
     IC_languages["Italian"] = 0.0738;
-    IC_languages["French"] = 0.0778;
+    IC_languages["French"] = 0.0694;
     IC_languages["Russian"] = 0.0529;
     IC_languages["English"] = 0.0667;
-    IC_languages["German"] = 0.0762;
-    IC_languages["Spanish"] = 0.0770;
+    IC_languages["German"] = 0.0734;
+    IC_languages["Spanish"] = 0.0729;
+    IC_languages["Portuguese"] = 0.0824;
+    IC_languages["Turkish"] = 0.0701;
+    IC_languages["Swedish"] = 0.0681;
+    IC_languages["Polish"] = 0.0607;
+    IC_languages["Danish"] = 0.0672;
+    IC_languages["Icelandic"] = 0.0669;
+    IC_languages["Finnish"] = 0.0699;
+    IC_languages["Czech"] = 0.0510;
+    IC_languages["Latin"] = 0.0726; // calculated from rel. fr. available at: https://www.sttmedia.com/characterfrequency-latin
     IC_languages["Random text"] = 0.0385;
+
 
     argv[arg1] = "";
     delimitter = "";
