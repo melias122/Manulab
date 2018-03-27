@@ -21,12 +21,20 @@ Frequency::Frequency()
     btn_open_file_browser.setText("Open file browser");
     btn_export_data.setText("Export to csv");
     btn_show_graph.setText("Show graph"); //new Button
+    btn_option_abs.setText("Show frequencies in absolute numbers");
+    btn_option_rel.setText("Show frequencies in relative numbers");
+    btn_grp.addButton(&btn_option_abs);
+    btn_grp.addButton(&btn_option_rel);
+    btn_option_abs.setChecked(true);
 
     sort_asc = true;
+    is_abs = true;
 
     connect(&btn_export_data, &QPushButton::clicked, this, &Frequency::export_histogram);
     connect(&btn_open_file_browser, &QPushButton::clicked, this, &Frequency::open_file_browser);
     connect(&btn_show_graph, &QPushButton::clicked, this, &Frequency::show_graph); //connect function, called after button press
+    connect(&btn_option_abs, &QPushButton::clicked, this, &Frequency::set_abs);
+    connect(&btn_option_rel, &QPushButton::clicked, this, &Frequency::set_rel);
     connect(header_view, &QHeaderView::sectionDoubleClicked, this, &Frequency::sort_by_colum);
 }
 
@@ -148,6 +156,8 @@ void Frequency::resultUi(QWidget *parent)
     main_layout.addWidget(&btn_open_file_browser, 1, 1, 1, 1);
     main_layout.addWidget(&btn_export_data, 2, 0, 1, 2);
     main_layout.addWidget(&btn_show_graph, 3, 0, 1, 2);//new button to layout
+    main_layout.addWidget(&btn_option_abs, 4, 0, 1, 2);
+    main_layout.addWidget(&btn_option_rel, 5, 0, 1, 2);
 
     dialog->setLayout(&main_layout);
     dialog->setWindowTitle("Histogram for the document");
@@ -282,7 +292,7 @@ void Frequency::open_file_browser()
 void Frequency::show_graph()//show graph function(definition)
 {
     QScrollArea* scrollArea = new QScrollArea();
-    QWidget* widget = new Frequency::Graph(data);
+    QWidget* widget = new Frequency::Graph(data, is_abs);
     scrollArea->setWidget(widget);
     scrollArea->resize(scrollArea->width(), widget->height()+20);
     scrollArea->setMinimumHeight(widget->height()+20);
@@ -291,22 +301,33 @@ void Frequency::show_graph()//show graph function(definition)
     scrollArea->activateWindow();
 }
 
+void Frequency::set_abs()
+{
+    is_abs = true;
+}
 
-Frequency::Graph::Graph(const QMap<QString, quint32>& data)//graph window
+void Frequency::set_rel()
+{
+    is_abs = false;
+}
+
+Frequency::Graph::Graph(const QMap<QString, quint32>& data, bool is_abs)//graph window
     : barColor(Qt::green)
     , data(data)
     , max(0)
+    , is_abs(is_abs)
 
 {   int swap = 0;
     int inc = 25;
     int lenght = 0;
-    for(const auto& e : data.keys()) {
-
-              lenght = e.length();
-              if(swap < lenght){
-                  swap = lenght;
-              }
-}
+    for(const auto& e : data.keys())
+    {
+        lenght = e.length();
+        if(swap < lenght)
+        {
+            swap = lenght;
+        }
+    }
 
     qDebug() << swap;
     if(swap >= 5)
@@ -323,10 +344,22 @@ Frequency::Graph::Graph(const QMap<QString, quint32>& data)//graph window
     }
 
     this->resize(inc*data.size(), 580);
+    if(!is_abs)
+    {
+        auto values = data.values();
+        int total = std::accumulate(values.begin(), values.end(), 0);
+        for(const auto& e : data.toStdMap())
+        {
+            float rel = 100*(float)e.second/(float)total;
+            data_float.insert(e.first, rel);
+        }
+    }
     if(!data.empty())
     {
         max = *std::max_element(data.begin(), data.end());
-    }}
+        max_float = *std::max_element(data_float.begin(), data_float.end());
+    }
+}
 
 void Frequency::Graph::drawAxis(QPainter& painter)//graph axis
 {
@@ -339,8 +372,18 @@ void Frequency::Graph::drawAxis(QPainter& painter)//graph axis
         {
             int y = 10+570/10*i;
             painter.drawLine(10, y, 30, y);
-            int value = ((float)max/10.0f)*(10.0f-(float)i);
-            QString valueStr = QString::number(value);
+
+            QString valueStr;
+            if(is_abs)
+            {
+                int value = ((float)max/10.0f)*(10.0f-(float)i);
+                valueStr = QString::number(value);
+            }
+            else
+            {
+                int value = ((float)max_float/10.0f)*(10.0f-(float)i);
+                valueStr = QString::number(value)+" %";
+            }
             int dlzka = valueStr.size();
 
             if(dlzka > 4){
