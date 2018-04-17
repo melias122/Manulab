@@ -3,6 +3,8 @@
 #include "filter/settingsDialog.h"
 #include "project/config.h"
 
+#include <QFontMetrics>
+
 QString Frequency::arg1 = "N-gram";
 QString Frequency::arg2 = "Delimitter";
 
@@ -21,8 +23,8 @@ Frequency::Frequency()
     btn_open_file_browser.setText("Open file browser");
     btn_export_data.setText("Export to csv");
     btn_show_graph.setText("Show graph"); //new Button
-    btn_option_abs.setText("Show frequencies in absolute numbers");
-    btn_option_rel.setText("Show frequencies in relative numbers");
+    btn_option_abs.setText("absolute");
+    btn_option_rel.setText("relative");
     btn_grp.addButton(&btn_option_abs);
     btn_grp.addButton(&btn_option_rel);
     btn_option_abs.setChecked(true);
@@ -155,9 +157,9 @@ void Frequency::resultUi(QWidget *parent)
     main_layout.addWidget(&le_file_path, 1, 0, 1, 1);
     main_layout.addWidget(&btn_open_file_browser, 1, 1, 1, 1);
     main_layout.addWidget(&btn_export_data, 2, 0, 1, 2);
-    main_layout.addWidget(&btn_show_graph, 3, 0, 1, 2);//new button to layout
-    main_layout.addWidget(&btn_option_abs, 4, 0, 1, 2);
-    main_layout.addWidget(&btn_option_rel, 5, 0, 1, 2);
+    main_layout.addWidget(&btn_show_graph, 4, 0, 1, 2);//new button to layout
+    main_layout.addWidget(&btn_option_abs, 3, 0, 1, 2);
+    main_layout.addWidget(&btn_option_rel, 3, 1, 1, 2);
 
     dialog->setLayout(&main_layout);
     dialog->setWindowTitle("Histogram for the document");
@@ -316,34 +318,11 @@ Frequency::Graph::Graph(const QMap<QString, quint32>& data, bool is_abs)//graph 
     , data(data)
     , max(0)
     , is_abs(is_abs)
+    , max_offset(0)
+    , max_width(0)
 
-{   int swap = 0;
-    int inc = 25;
-    int lenght = 0;
-    for(const auto& e : data.keys())
-    {
-        lenght = e.length();
-        if(swap < lenght)
-        {
-            swap = lenght;
-        }
-    }
-
-    qDebug() << swap;
-    if(swap >= 5)
-    {
-        inc = 37;
-    }
-    if(swap >= 7)
-    {
-        inc = 53;
-    }
-    if(swap >= 9)
-    {
-        inc = 82;
-    }
-
-    this->resize(inc*data.size(), 580);
+{
+    this->resize(100*data.size(), 580);
     if(!is_abs)
     {
         auto values = data.values();
@@ -361,17 +340,43 @@ Frequency::Graph::Graph(const QMap<QString, quint32>& data, bool is_abs)//graph 
     }
 }
 
+void Frequency::Graph::getMaxOffset(QPainter& painter)
+{
+    if(max_offset == 0)
+    {
+        for(quint32 i = 0; i < 10; ++i)
+        {
+            QString valueStr;
+            if(is_abs)
+            {
+                int value = ((float)max/10.0f)*(10.0f-(float)i);
+                valueStr = QString::number(value);
+            }
+            else
+            {
+                int value = ((float)max_float/10.0f)*(10.0f-(float)i);
+                valueStr = QString::number(value)+" %";
+            }
+            QFontMetrics fm = painter.fontMetrics();
+            int pixels = fm.width(valueStr);
+            offsets[i] = pixels;
+            if(pixels > max_offset)
+            {
+                max_offset = pixels;
+            }
+        }
+    }
+}
+
 void Frequency::Graph::drawAxis(QPainter& painter)//graph axis
 {
     painter.setBrush(QBrush(Qt::black));
     if(!data.empty())
     {
-        painter.drawLine(30, 0, 30, this->height()-10);
-        painter.drawLine(10, this->height()-20, this->width()-10, this->height()-20);
         for(quint32 i = 0; i < 10; ++i)
         {
             int y = 10+570/10*i;
-            painter.drawLine(10, y, 30, y);
+            painter.drawLine(max_offset+5, y, max_offset+15, y);
 
             QString valueStr;
             if(is_abs)
@@ -384,18 +389,31 @@ void Frequency::Graph::drawAxis(QPainter& painter)//graph axis
                 int value = ((float)max_float/10.0f)*(10.0f-(float)i);
                 valueStr = QString::number(value)+" %";
             }
-            int dlzka = valueStr.size();
+            QRect textRect(5+(max_offset-offsets[i]), y, offsets[i], 20);
+            painter.drawText(textRect, valueStr);
+        }
 
-            if(dlzka > 4){
-            QRect textRect(0, y, dlzka*10, 20);
-            painter.drawText(textRect, valueStr);}
-            if(dlzka == 4){
-            QRect textRect(5, y, dlzka*10, 20);
-            painter.drawText(textRect, valueStr);}
-            if(dlzka <= 3){
-            QRect textRect(10, y, dlzka*10, 20);
-            painter.drawText(textRect, valueStr);}
+        // Y axis
+        painter.drawLine(max_offset+10, 0, max_offset+10, this->height()-10);
 
+        int x = max_offset+10+data.size()*(max_width+10);
+        // X axis
+        painter.drawLine(10, this->height()-20, x, this->height()-20);
+    }
+}
+
+void Frequency::Graph::getMaxWidth(QPainter& painter)
+{
+    if(max_width == 0)
+    {
+        for(const auto& e : data.keys())
+        {
+            QFontMetrics fm = painter.fontMetrics();
+            int pixels = fm.width(e);
+            if(pixels > max_width)
+            {
+                max_width = pixels;
+            }
         }
     }
 }
@@ -404,23 +422,10 @@ void Frequency::Graph::drawBars(QPainter& painter)//graph bars
 {
     painter.setBrush(QBrush(Qt::green));
     int barWidth = 10;
-    int betweenBars = 10;
     int i = 0;
-    int swap = 0;
-    int lenght = 0;
-
-    for(const auto& e : data.keys()) {
-
-        lenght = e.length();
-        if(swap < lenght){
-            swap = lenght;
-        }}
-
 
     for(const auto& val : data.toStdMap())
     {
-        int space =0;
-        int spaceText = 0;
         if(i%2)
         {
             painter.setBrush(QBrush(Qt::green));
@@ -431,25 +436,11 @@ void Frequency::Graph::drawBars(QPainter& painter)//graph bars
         }
         int height = ((float)val.second/(float)max)*((float)this->height()-(float)30);
         int y = this->height()-20-height;
-        if(swap>=5){
-             space = 15;
-             spaceText = 15;
-        }
-        if(swap>=7){
-             space = 30;
-             spaceText = 30;
-        }
-        if(swap>=9){
-             space = 60;
-             spaceText = 60;
-        }
 
-        int x = 2*betweenBars+i*(barWidth+betweenBars+space);
-
-
+        int x = max_offset+10+i*(max_width+10);
 
         QRect barRect(x+10, y, barWidth, height);
-        QRect textRect(x+6+(barWidth/2), this->height()-20, 15 + spaceText, 15);
+        QRect textRect(x+10, this->height()-20, max_width, 15);
 
         painter.drawRect(barRect);
         painter.drawText(textRect, val.first);
@@ -460,6 +451,9 @@ void Frequency::Graph::drawBars(QPainter& painter)//graph bars
 void Frequency::Graph::paintEvent(QPaintEvent* /*event*/)//paint event
 {
     QPainter painter(this);
+    getMaxOffset(painter);
+    getMaxWidth(painter);
+    this->resize(max_offset+10+data.size()*(max_width+10), 580);
     drawAxis(painter);
     drawBars(painter);
 }

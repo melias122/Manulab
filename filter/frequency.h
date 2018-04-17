@@ -67,6 +67,8 @@ private:
         Graph(const QMap<QString, quint32>& data, bool is_abs);
         void paintEvent(QPaintEvent *event) override;
     private:
+        void getMaxOffset(QPainter& painter);
+        void getMaxWidth(QPainter& painter);
         void drawAxis(QPainter& painter);
         void drawBars(QPainter& painter);
         QBrush barColor;
@@ -75,6 +77,9 @@ private:
         quint32 max;
         float max_float;
         bool is_abs;
+        int max_offset;
+        int max_width;
+        int offsets[10];
     };
 
 
