@@ -88,22 +88,9 @@ void Distance::reset()
 }
 
 
-void Distance::generateAllNGrams(qint32 n, QSet<QString>& res) {
-        generateAllNGrams(1, n, "", res, 26);
-}
 
-void Distance::generateAllNGrams(qint32 lvl, qint32 n, QString subStr, QSet<QString>& res, qint32 abcLength) {
-        for (int i = 0; i < abcLength; i++) {
-            char c = (char) (i + 'a');
-            if (lvl < n) {
-                generateAllNGrams(lvl + 1, n, subStr + c, res, abcLength);
-            } else {
-                res.insert(subStr + c);
-            }
-        }
-}
 
-void Distance::findAllNGrams(QString &text,quint32 n, QSet<QString>& res){
+void Distance::findAllNGrams(QString &text, quint32 n, QSet<QString>& res){
     QStringList chunks = text.split(delimitter);
 
     QString ngram;
@@ -115,34 +102,26 @@ void Distance::findAllNGrams(QString &text,quint32 n, QSet<QString>& res){
             for(int j=0; j < n; j++){
                 ngram.append(chunks.at(i+j));
             }
-            //ngram = ngram.left(ngram.length() - 1); // remove last ,
             if(ngram.isEmpty()){
                 continue;
             }
-//            if( res.find(ngram) != res.end() )
-//            {
-                res.insert(ngram);
-//            }
-
+            res.insert(ngram);
         }
-
 }
 
 QString Distance::process(QString &text)
 {
-
-    //QStringList chunks = text.replace(delimitter);
-
 
     // check lenght of ngram inserted by user
     if( (ngram_len > 0) && (ngram_len < 5) )
     {
 
         QSet<QString> keys;
-        //generateAllNGrams(ngram_len,keys);
         findAllNGrams(text, ngram_len, keys);
+        qDebug() << "Unique ngrams: " << keys.size();
 
-          QString txt = text.replace( delimitter, "" );
+
+        QString txt = text.replace( delimitter, "" );
         foreach(QString key, keys){
             QList<quint32> distances;
 
@@ -180,7 +159,7 @@ void Distance::resultUi(QWidget *parent)
     QDialog *dialog = new QDialog(parent);
     QGridLayout main_layout;
 
-    const qint32 columns_count = 3;
+    const qint32 columns_count = 4;
 
 
     // adding widgetss to layout
@@ -190,13 +169,12 @@ void Distance::resultUi(QWidget *parent)
     main_layout.addWidget(&btn_export_data, 2, 0, 1, 2);
 
     dialog->setLayout(&main_layout);
-    dialog->setWindowTitle("Histogram for the document");
+    dialog->setWindowTitle("Distance results");
 
         // setting rows, columns and labels for columns
-        table.setRowCount(data.count()+1);
         table.setColumnCount(columns_count);
         table.setHorizontalHeaderLabels(QStringList() << "ngram"
-                                   << "avg. dist." << "max. dist.");
+                                   << "avg. dist." << "max. dist." << "count");
         // stretch the columns width to their content
         table.setHorizontalHeader(header_view);
         table.resizeColumnsToContents();
@@ -207,15 +185,28 @@ void Distance::resultUi(QWidget *parent)
         }
 
         // inserting data to table
-        int i=0;
 
         QList<QString> keys = data.keys();
 
-
-
+        int i=0;
         foreach( QString k, keys )
         {
                 QList<quint32> vals = data[k];
+                if(vals.empty()){
+                    continue;
+                }
+                i++;
+        }
+        table.setRowCount(i);
+
+        i=0;
+        foreach( QString k, keys )
+        {
+                QList<quint32> vals = data[k];
+                if(vals.empty()){
+                    continue;
+                }
+
                 quint32 max = *std::max_element(vals.begin(), vals.end());
                 float avg = std::accumulate(vals.begin(), vals.end(), 0.0) / vals.size();
 
@@ -225,13 +216,19 @@ void Distance::resultUi(QWidget *parent)
                 QTableWidgetItem *itemMax = new QTableWidgetItem;
                 itemMax->setData(Qt::DisplayRole, max);
 
+                QTableWidgetItem *itemCount = new QTableWidgetItem;
+                itemCount->setData(Qt::DisplayRole, vals.size()+1);
+
                 table.setItem(i, 0, new QTableWidgetItem(k));
                 table.setItem(i, 1, itemAvg);
                 table.setItem(i, 2, itemMax);
+                table.setItem(i, 3, itemCount);
+
 
                 i++;
 
         }
+
 
         dialog->exec();
 }

@@ -32,10 +32,7 @@ private slots:
     void sort_by_colum(int column);
 
 private:
-
-    void generateAllNGrams(qint32 n, QSet<QString>& res);
-    void generateAllNGrams(qint32 lvl, qint32 n, QString subStr, QSet<QString>& res, qint32 abcLength);
-    void findAllNGrams(QString &text,quint32 n, QSet<QString>& res);
+   void findAllNGrams(QString &text,quint32 n, QSet<QString>& res);
 
     QTableWidget table;
     QHeaderView *header_view;

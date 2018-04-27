@@ -25,7 +25,6 @@ SOURCES += main.cpp \
     filter/search.cpp \
     filter/reverse.cpp \
     filter/substitution.cpp \
-    filter/coincidenceindex.cpp \
     ui/filterlist.cpp \
     ui/filtermanager.cpp \
     filter/filter.cpp \
@@ -42,7 +41,9 @@ SOURCES += main.cpp \
     ui/thumbnailslider.cpp \
     helpers/imagepool.cpp \
     filter/distance.cpp \
-    filter/entropy.cpp
+    filter/entropy.cpp \
+    filter/repetitions.cpp \
+    filter/indexofcoincidence.cpp
 
 HEADERS += \
     ui/mainwindow.h \
@@ -60,7 +61,6 @@ HEADERS += \
     ui/filtermanager.h \
     filter/settingsDialog.h \
     filter/worker.h \
-    filter/coincidenceindex.h \
     project/page.h \
     project/path.h \
     ui/ListView.h \
@@ -71,7 +71,9 @@ HEADERS += \
     ui/thumbnailslider.h \
     helpers/imagepool.h \
     filter/distance.h \
-    filter/entropy.h
+    filter/entropy.h \
+    filter/repetitions.h \
+    filter/indexofcoincidence.h
 
 FORMS +=    ui/mainwindow.ui \
 	    ui/newproject.ui

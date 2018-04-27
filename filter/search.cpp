@@ -1,7 +1,7 @@
 #include "filter/search.h"
 #include "filter/settingsDialog.h"
 
-QString Search::arg1 = "Phrase/Regexp";
+QString Search::arg1 = "Phrase/Regex";
 
 Search::Search()
 {

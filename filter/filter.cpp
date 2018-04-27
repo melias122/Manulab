@@ -1,12 +1,11 @@
 #include "filter/filter.h"
 
 #include "filter/frequency.h"
-//#include "filter/reverse.h"
 #include "filter/search.h"
 #include "filter/substitution.h"
 #include "filter/orientation.h"
 #include "filter/select.h"
-#include "filter/coincidenceindex.h"
+#include "filter/indexofcoincidence.h"
 #include "filter/distance.h"
 #include "filter/entropy.h"
 
@@ -22,10 +21,11 @@ QHash<QString, FilterFactory::NewFilter> FilterFactory::factory = {
     {"Substitution", &newFilter<Substitution>},
     {"Frequency", &newFilter<Frequency>},
 //	{"Reverse", &newFilter<Reverse>},
-    {"IC", &newFilter<CoincidenceIndex>},
+    {"IC", &newFilter<IndexOfCoincidence>},
     {"Pattern search", &newFilter<Search>},
     {"Distances", &newFilter<Distance>},
     {"Entropy", &newFilter<Entropy>}
+    //,{"Repetitions", &newFilter<Repetitions>}
 
 };
 
