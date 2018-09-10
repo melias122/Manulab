@@ -12,3 +12,5 @@ add_library(ui
 target_include_directories(ui PRIVATE ..)
 
 target_link_libraries(ui PRIVATE Qt5::Widgets)
+
+add_clangformat(ui)

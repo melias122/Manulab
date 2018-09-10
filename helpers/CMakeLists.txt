@@ -4,3 +4,5 @@ add_library(helpers
 target_include_directories(helpers PRIVATE ../)
 
 target_link_libraries(helpers PRIVATE Qt5::Widgets)
+
+add_clangformat(helpers)

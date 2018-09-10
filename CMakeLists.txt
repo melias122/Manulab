@@ -14,7 +14,12 @@ set(CMAKE_AUTOUIC ON)
 # Automatically manage .qrc files
 set(CMAKE_AUTORCC ON)
 
+# TODO: Get rid of this..
 set(CMAKE_CXX_FLAGS "-std=c++11")
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+include(clangformat)
 
 if(APPLE AND EXISTS /usr/local/opt/qt5)
 	# Homebrew installs Qt5 (up to at least 5.9.1) in
@@ -42,3 +47,5 @@ target_link_libraries(manulab
 	helpers
 	project
 	ui)
+
+add_clangformat(manulab)

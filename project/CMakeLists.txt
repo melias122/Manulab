@@ -7,3 +7,5 @@ add_library(project
 target_include_directories(project PRIVATE ../)
 
 target_link_libraries(project PRIVATE Qt5::Widgets)
+
+add_clangformat(project)

@@ -16,3 +16,5 @@ add_library(filter
 target_include_directories(filter PRIVATE ../)
 
 target_link_libraries(filter PRIVATE Qt5::Widgets)
+
+add_clangformat(filter)

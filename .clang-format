@@ -1,0 +1,9 @@
+---
+BasedOnStyle: WebKit
+PointerAlignment: Right
+MaxEmptyLinesToKeep: 1
+UseTab: Always
+IndentWidth: 4
+TabWidth: 4
+SortIncludes: true
+...
