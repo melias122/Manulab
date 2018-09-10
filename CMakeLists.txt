@@ -14,6 +14,8 @@ set(CMAKE_AUTOUIC ON)
 # Automatically manage .qrc files
 set(CMAKE_AUTORCC ON)
 
+set(CMAKE_CXX_FLAGS "-std=c++11")
+
 if(APPLE AND EXISTS /usr/local/opt/qt5)
 	# Homebrew installs Qt5 (up to at least 5.9.1) in
 	# /usr/local/qt5, ensure it can be found by CMake since
