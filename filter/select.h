@@ -1,7 +1,7 @@
 #ifndef SELECT_H
 #define SELECT_H
 
-#include "filter/interface.h"
+#include "interface.h"
 
 class Select : public FilterInterface
 {

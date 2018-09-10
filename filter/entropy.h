@@ -1,7 +1,7 @@
 #ifndef ENTROPY_H
 #define ENTROPY_H
 
-#include "filter/interface.h"
+#include "interface.h"
 
 class Entropy : public FilterInterface
 {

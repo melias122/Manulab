@@ -1,11 +1,10 @@
-#include "ui/mainwindow.h"
 #include <QApplication>
+#include <QObject>
+#include <QThread>
 
 #include "project/pages.h"
 #include "ui/newproject.h"
-
-#include "qobject.h"
-#include "qthread.h"
+#include "ui/mainwindow.h"
 
 int main(int argc, char *argv[])
 {

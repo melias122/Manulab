@@ -6,8 +6,9 @@
 #include <QTableWidget>
 #include <QLabel>
 #include <QDebug>
-#include "filter/settingsDialog.h"
-#include "math.h"
+#include <cmath>
+
+#include "settingsDialog.h"
 
 QString Entropy::arg1 = "N-gram";
 QString Entropy::arg2 = "Delimitter";
@@ -91,7 +92,6 @@ QString Entropy::process(QString &text)
             total++;
         }
 
-        //
         QMap<QString, uint>::iterator map_it;
 
         entropy = 0;
@@ -102,7 +102,6 @@ QString Entropy::process(QString &text)
             entropy += pi * (log(pi)/log(2));
         }
         entropy *= -1;
-//        qDebug() << "entropy: " << entropy;
 
     }
     else

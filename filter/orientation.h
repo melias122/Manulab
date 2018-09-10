@@ -1,7 +1,7 @@
 #ifndef ORIENTATION_H
 #define ORIENTATION_H
 
-#include "filter/interface.h"
+#include "interface.h"
 
 // Orientation defines folowing directions of
 // text reading

@@ -2,10 +2,10 @@
 #define NEWPROJECT_H
 
 #include <QDialog>
-#include<QIcon>
+#include <QIcon>
+#include <QFileDialog>
 
 #include "project/pages.h"
-#include "qfiledialog.h"
 
 namespace Ui {
 class NewProject;

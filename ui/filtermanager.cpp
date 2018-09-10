@@ -1,10 +1,10 @@
-#include "ui/filtermanager.h"
+#include "filtermanager.h"
 
-#include "qevent.h"
-#include "qmimedata.h"
-#include "qmenu.h"
-#include "qshortcut.h"
-#include "qdebug.h"
+#include <qevent.h>
+#include <QMimeData>
+#include <QMenu>
+#include <QShortcut>
+#include <QDebug>
 
 #include "filter/filter.h"
 
@@ -21,7 +21,6 @@ FilterManager::FilterManager(QWidget *parent)
 	setMovement(QListView::Free);
 	setDragEnabled(true);
 	viewport()->setAcceptDrops(true);
-//	setDropIndicatorShown(true);
 	setDragDropMode(QAbstractItemView::InternalMove);
 	setContextMenuPolicy(Qt::CustomContextMenu);
 

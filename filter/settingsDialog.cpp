@@ -1,14 +1,14 @@
 #include "settingsDialog.h"
 
-#include "qobject.h"
-#include "qwidget.h"
-#include "qpushbutton.h"
-#include "qboxlayout.h"
-#include "qlayout.h"
-#include "qlineedit.h"
-#include "qdialogbuttonbox.h"
-#include "qcombobox.h"
-#include "qcheckbox.h"
+#include <QObject>
+#include <QWidget>
+#include <QPushButton>
+#include <QBoxLayout>
+#include <QLayout>
+#include <QLineEdit>
+#include <QDialogButtonBox>
+#include <QComboBox>
+#include <QCheckBox>
 
 settingsDialog::settingsDialog(QWidget *parent)
 	: QDialog(parent)

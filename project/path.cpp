@@ -1,6 +1,6 @@
 #include "path.h"
 
-#include "qjsonobject.h"
+#include <QJsonObject>
 
 #define j_index "index"
 #define j_image "image"

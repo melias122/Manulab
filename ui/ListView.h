@@ -1,8 +1,8 @@
 #ifndef LISTVIEW_H
 #define LISTVIEW_H
 
-#include "qlistview.h"
-#include "qstringlistmodel.h"
+#include <QListView>
+#include <QStringListModel>
 
 class ListView : public QListView
 {

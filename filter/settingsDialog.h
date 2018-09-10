@@ -1,8 +1,9 @@
 #ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H
 
-#include "qdialog.h"
-#include "filter/interface.h"
+#include "interface.h"
+
+#include <QDialog>
 
 class settingsDialog : public QDialog
 {

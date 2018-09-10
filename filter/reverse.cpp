@@ -1,7 +1,7 @@
-#include "filter/reverse.h"
+#include "reverse.h"
 
-#include "qstring.h"
-#include "algorithm"
+#include <QString>
+#include <algorithm>
 
 QString Reverse::process(QString &text)
 {

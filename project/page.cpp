@@ -1,10 +1,10 @@
 #include "page.h"
 
-#include "project/config.h"
+#include "config.h"
 
-#include "qfile.h"
-#include "qtextstream.h"
-#include "qpixmapcache.h"
+#include <QFile>
+#include <QTextStream>
+#include <QPixmapCache>
 
 Page::Page(const Path *path)
     : m_path(path)

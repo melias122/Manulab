@@ -1,11 +1,10 @@
-#include "filter/distance.h"
+#include "distance.h"
 
-#include "filter/settingsDialog.h"
+#include "settingsDialog.h"
 #include "project/config.h"
 
 QString Distance::arg1 = "N-gram";
 QString Distance::arg2 = "Delimitter";
-
 
 Distance::Distance()
 {
@@ -73,10 +72,7 @@ QList<Page> Distance::processPages(QList<Page> &pages){
         txt = txt.replace("\n",delimitter);
         allInOne.append(txt).append(delimitter);
     }
-    //qDebug() << "before " << allInOne;
     allInOne = allInOne.left(allInOne.size() - delimitter.length());
-    //qDebug() << "after " << allInOne;
-    //left(allInOne.length() - 1);// last
     process(allInOne);
     return pages;
 }
@@ -86,9 +82,6 @@ void Distance::reset()
     data.clear();
     total = 0;
 }
-
-
-
 
 void Distance::findAllNGrams(QString &text, quint32 n, QSet<QString>& res){
     QStringList chunks = text.split(delimitter);
@@ -289,8 +282,6 @@ QString Distance::export_histogram(void)
             stream<< "\n";
 
     }
-
-
 
     file.flush();
     file.close();

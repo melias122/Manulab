@@ -2,7 +2,7 @@
 #define IMAGEVIEWER_H
 
 #include "qgraphicsview.h"
-#include "qpixmap.h"
+#include <QPixmap>
 
 class QGraphicsPixmapItem;
 class QMouseEvent;

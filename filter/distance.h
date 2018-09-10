@@ -1,8 +1,6 @@
 #ifndef DISTANCE_H
 #define DISTANCE_H
 
-#include "filter/interface.h"
-#include "filter/worker.h"
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QLabel>
@@ -13,6 +11,9 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QFileDialog>
+
+#include "interface.h"
+#include "worker.h"
 
 class Distance : public FilterInterface, public QObject
 {

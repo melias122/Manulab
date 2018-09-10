@@ -1,15 +1,15 @@
-#include "ui/mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "ui/newproject.h"
 
-#include "qfiledialog.h"
-#include "qfontdialog.h"
-#include "qdialogbuttonbox.h"
-#include "qlabel.h"
-#include "qmessagebox.h"
-#include "project/page.h"
-
+#include <QFileDialog>
+#include <QFontDialog>
+#include <QDialogButtonBox>
 #include <QLabel>
+#include <QMessageBox>
+#include <QLabel>
+
+#include "newproject.h"
+#include "project/page.h"
 
 #define SECOND (1000)
 

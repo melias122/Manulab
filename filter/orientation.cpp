@@ -1,11 +1,11 @@
 #include "orientation.h"
 
-#include "algorithm"
-#include "qdialog.h"
-#include "qcombobox.h"
-#include "qlayout.h"
-#include "qpushbutton.h"
-#include "qobject.h"
+#include <algorithm>
+#include <QDialog>
+#include <QComboBox>
+#include <QLayout>
+#include <QPushButton>
+#include <QObject>
 
 QString Orientation::arg1 = "Horizontal";
 QString Orientation::arg2 = "Vertical";

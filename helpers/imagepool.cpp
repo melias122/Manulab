@@ -1,5 +1,4 @@
-#include "helpers/imagepool.h"
-
+#include "imagepool.h"
 
 QPixmap ImagePool::getImage(int index)
 {

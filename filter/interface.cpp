@@ -1,11 +1,11 @@
 #include "interface.h"
+
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
+#include <QDebug>
+
 #include "filter.h"
-
-#include "qjsonobject.h"
-#include "qjsonvalue.h"
-#include "qjsonarray.h"
-
-#include "qdebug.h"
 
 FilterInterface* FilterInterface::fromJson(const QJsonObject &o)
 {
@@ -46,4 +46,3 @@ QList<Page> FilterInterface::processPages(QList<Page> &pages){
     }
     return pages;
 }
-

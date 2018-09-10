@@ -1,9 +1,9 @@
-#include "ui/texteditor.h"
-#include "ui/mainwindow.h"
+#include "texteditor.h"
+#include "mainwindow.h"
+
 #include <QTextStream>
 #include <QtWidgets>
-
-#include "qdebug.h"
+#include <QDebug>
 
 TextEditor::TextEditor(QWidget *parent)
     : QTextEdit(parent)
@@ -122,7 +122,7 @@ void TextEditor::findNextText(const QString &text)
 }
 
 void TextEditor::findPreviousText(const QString &text)
-{ 
+{
     if( !text.isEmpty() )
     {
         if( find(text, QTextDocument::FindBackward) == false )

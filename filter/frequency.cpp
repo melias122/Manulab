@@ -1,9 +1,9 @@
-#include "filter/frequency.h"
-
-#include "filter/settingsDialog.h"
-#include "project/config.h"
+#include "frequency.h"
 
 #include <QFontMetrics>
+
+#include "settingsDialog.h"
+#include "project/config.h"
 
 QString Frequency::arg1 = "N-gram";
 QString Frequency::arg2 = "Delimitter";
@@ -85,10 +85,8 @@ QList<Page> Frequency::processPages(QList<Page> &pages){
         txt = txt.replace("\n",delimitter);
         allInOne.append(txt).append(delimitter);
     }
-    //qDebug() << "before " << allInOne;
+
     allInOne = allInOne.left(allInOne.size() - delimitter.length());
-    //qDebug() << "after " << allInOne;
-    //left(allInOne.length() - 1);// last
     process(allInOne);
     return pages;
 }
@@ -119,7 +117,6 @@ QString Frequency::process(QString &text)
             if(ngram.isEmpty()){
                 continue;
             }
-            //qDebug() << "adding" << ngram;
             if( data.find(ngram) != data.end() )
             {
                 data[ngram]++;
@@ -193,7 +190,6 @@ void Frequency::resultUi(QWidget *parent)
             QList<QString> keys = data.keys( val );
             foreach( QString key, keys )
             {
-                //qDebug() << val << ":" << key;
                 QString ngram = key;
                 ngram.push_front('[');
                 ngram.push_back(']');
@@ -224,7 +220,6 @@ void Frequency::resultUi(QWidget *parent)
         table.setItem(i, 2, itemRel);
 
         dialog->show();//exec to show
-//    }
 }
 
 QString Frequency::export_histogram(void)

@@ -1,10 +1,11 @@
 #ifndef FILTER
 #define FILTER
 
-#include "qsharedpointer.h"
-#include "filter/interface.h"
+#include "interface.h"
 
-using Filter = QSharedPointer<FilterInterface>;
+#include <memory>
+
+using Filter = std::shared_ptr<FilterInterface>;
 
 class FilterFactory
 {

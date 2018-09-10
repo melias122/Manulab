@@ -3,8 +3,7 @@
 
 #include <QSlider>
 #include <QPixmap>
-#include <QMouseEvent>
-#include <QEvent>
+#include <QtEvents>
 #include <QDebug>
 
 class QMouseEvent;

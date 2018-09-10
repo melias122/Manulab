@@ -1,11 +1,11 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "qobject.h"
-#include "qfont.h"
+#include <QObject>
+#include <QFont>
 
-#include "project/path.h"
-#include "project/page.h"
+#include "path.h"
+#include "page.h"
 
 class Config
 {

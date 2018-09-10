@@ -1,8 +1,9 @@
-#include "filter/substitution.h"
+#include "substitution.h"
 
-#include "qdebug.h"
-#include "qregularexpression.h"
-#include "filter/settingsDialog.h"
+#include <QDebug>
+#include <QRegularExpression>
+
+#include "settingsDialog.h"
 
 QString Substitution::arg1 = "Pattern";
 QString Substitution::arg2 = "Replace";

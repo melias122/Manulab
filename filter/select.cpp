@@ -1,4 +1,5 @@
 #include "select.h"
+
 #include "settingsDialog.h"
 
 QString Select::arg1 = "From";
@@ -20,7 +21,6 @@ void Select::setArgs(const Args &args)
 	to = argv[arg2].toString().toInt();
 }
 
-
 QList<Page> Select::processPages(QList<Page> &pages){
     if(argv[arg1] == "" || argv[arg2]==""){
         return pages;
@@ -37,11 +37,6 @@ QList<Page> Select::processPages(QList<Page> &pages){
 
 QString Select::process(QString &text)
 {
-//	counter++;
-//	if (counter >= from && counter <= to) {
-//		return text;
-//	}
-
     return text;
 }
 

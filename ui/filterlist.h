@@ -2,7 +2,6 @@
 #define FILTERLIST_H
 
 #include "qlistwidget.h"
-#include "filter/filter.h"
 
 class FilterList : public QListWidget
 {

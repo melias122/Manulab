@@ -1,9 +1,9 @@
 #ifndef PAGE_H
 #define PAGE_H
 
-#include "qstring.h"
-#include "qpixmap.h"
-#include "qpixmapcache.h"
+#include <QString>
+#include <QPixmap>
+#include <QPixmapCache>
 
 class Path;
 

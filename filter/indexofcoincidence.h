@@ -1,7 +1,7 @@
 #ifndef COINCIDENCEINDEX_H
 #define COINCIDENCEINDEX_H
 
-#include "filter/interface.h"
+#include "interface.h"
 
 class IndexOfCoincidence : public FilterInterface
 {

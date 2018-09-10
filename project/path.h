@@ -1,7 +1,7 @@
 #ifndef PATH_H
 #define PATH_H
 
-#include "qstring.h"
+#include <QString>
 
 class QJsonObject;
 

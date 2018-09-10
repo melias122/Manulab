@@ -1,5 +1,5 @@
-#include "filter/search.h"
-#include "filter/settingsDialog.h"
+#include "search.h"
+#include "settingsDialog.h"
 
 QString Search::arg1 = "Phrase/Regex";
 
@@ -105,7 +105,8 @@ void Search::resultUi(QWidget *parent)
     table.setRowCount(data.count());
     table.setColumnCount(2);
     table.setHorizontalHeaderLabels(QStringList()<< "page" << "line");
-    // stretch the columns width to their content
+
+	// stretch the columns width to their content
     table.setHorizontalHeader(header_view);
     table.resizeColumnsToContents();
 
@@ -114,15 +115,11 @@ void Search::resultUi(QWidget *parent)
         table.horizontalHeaderItem(i)->setTextAlignment(Qt::AlignLeft);
     }
 
-    // inserting data to table
-    // data representation
+    // inserting data to table data representation
     for( int i=0; i<data.count(); i++ )
     {
         QPair<quint32, quint32> p = data.at(i);
-//        result = result.append("page: "+QString::number(p.first));
-//        result = result.append(", line: "+QString::number(p.second));
-//        result = result.append("\n");
-        //
+
         QTableWidgetItem *page = new QTableWidgetItem;
         page->setData(Qt::DisplayRole, QString::number(p.first));
         QTableWidgetItem *line = new QTableWidgetItem;

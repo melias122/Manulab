@@ -1,8 +1,9 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include "qstring.h"
-#include "qvariant.h"
+#include <QString>
+#include <QVariant>
+
 #include "project/page.h"
 
 // TODO: make separate class for ui fuctions with "builer/declarative" style

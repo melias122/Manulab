@@ -1,10 +1,10 @@
-#include "project/pages.h"
+#include "pages.h"
 
 #include "filter/worker.h"
 
-#include "qfiledialog.h"
-#include "qthread.h"
-#include "qtconcurrentmap.h"
+#include <QFileDialog>
+#include <QThread>
+#include <QtConcurrent/QtConcurrent>
 
 struct Preload {
 	Preload(int index, int max = 5) : index(index), max(max) {}

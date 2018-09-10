@@ -1,32 +1,30 @@
-#include "filter/filter.h"
+#include "filter.h"
 
-#include "filter/frequency.h"
-#include "filter/search.h"
-#include "filter/substitution.h"
-#include "filter/orientation.h"
-#include "filter/select.h"
-#include "filter/indexofcoincidence.h"
-#include "filter/distance.h"
-#include "filter/entropy.h"
+#include "frequency.h"
+#include "search.h"
+#include "substitution.h"
+#include "orientation.h"
+#include "select.h"
+#include "indexofcoincidence.h"
+#include "distance.h"
+#include "entropy.h"
 
-#include "qjsondocument.h"
-#include "qjsonarray.h"
-#include "qjsonobject.h"
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 
 template <typename filter> FilterInterface *newFilter() { return new filter; }
 
+// TODO(m): Add registry
 QHash<QString, FilterFactory::NewFilter> FilterFactory::factory = {
     {"Sub-selection", &newFilter<Select>},
     {"Page orientation", &newFilter<Orientation>},
     {"Substitution", &newFilter<Substitution>},
     {"Frequency", &newFilter<Frequency>},
-//	{"Reverse", &newFilter<Reverse>},
     {"IC", &newFilter<IndexOfCoincidence>},
     {"Pattern search", &newFilter<Search>},
     {"Distances", &newFilter<Distance>},
     {"Entropy", &newFilter<Entropy>}
-    //,{"Repetitions", &newFilter<Repetitions>}
-
 };
 
 Filter FilterFactory::create(const QString &name)

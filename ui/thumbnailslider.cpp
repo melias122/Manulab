@@ -1,9 +1,9 @@
-#include "ui/thumbnailslider.h"
-#include <QDebug>
+#include "thumbnailslider.h"
 
-#include "qgraphicsitem.h"
-#include "qevent.h"
-#include "qmenu.h"
+#include <QDebug>
+#include <QGraphicsItem>
+#include <QtEvents>
+#include <QMenu>
 
 thumbnailSlider::thumbnailSlider(QWidget *parent):
     QSlider(parent)

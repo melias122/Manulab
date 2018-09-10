@@ -1,14 +1,13 @@
-#include "ui/newproject.h"
+#include "newproject.h"
 #include "ui_newproject.h"
 
+#include <QFileDialog>
+#include <QSignalMapper>
+#include <QToolButton>
+#include <QLayoutItem>
+#include <QDebug>
+
 #include "project/config.h"
-
-#include "qfiledialog.h"
-#include "qsignalmapper.h"
-#include "qtoolbutton.h"
-#include "qlayoutitem.h"
-
-#include "qdebug.h"
 
 NewProject::NewProject(QWidget *parent)
     : QDialog(parent)
@@ -19,7 +18,6 @@ NewProject::NewProject(QWidget *parent)
 
 	connect(ui->ProjectName, &QLineEdit::textEdited, this, &NewProject::projectExist);
 
-//	checkRecent();
 	createRecentPanel();
 	createBlocks();
 }

@@ -1,7 +1,7 @@
 #ifndef REVERSE_H
 #define REVERSE_H
 
-#include "filter/interface.h"
+#include "interface.h"
 
 class Reverse : public FilterInterface
 {

@@ -7,17 +7,20 @@
 #include <QTableWidget>
 #include <QLabel>
 #include <QDebug>
-#include "filter/settingsDialog.h"
-#include "math.h"
+#include <cmath>
+
+#include "settingsDialog.h"
 
 QString IndexOfCoincidence::arg1 = "Delimitter";
 QString IndexOfCoincidence::arg2 = "Threshold";
 
-
 IndexOfCoincidence::IndexOfCoincidence()
 {
      uiFlag = UiFlag(result | settings);
-    // https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
+
+	 // TODO(m): Add option to read IC's from file
+
+	// https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
 	// http://www.dcode.fr/index-coincidence
     // http://alexbarter.com/statistics/index-of-coincidence/
     IC_languages["Italian"] = 0.0738;
@@ -35,22 +38,12 @@ IndexOfCoincidence::IndexOfCoincidence()
     IC_languages["Finnish"] = 0.0699;
     IC_languages["Czech"] = 0.0510;
     IC_languages["Latin"] = 0.0726; // calculated from rel. fr. available at: https://www.sttmedia.com/characterfrequency-latin
-    /*
-     double latin[] = {8.89, 1.58, 3.99, 2.77, 11.38, 0.93, 1.21, 0.69, 11.44, 3.15, 5.38, 6.28, 5.40, 3.03, 1.51, 6.67, 7.60, 8.00, 8.46, 0.96, 0.60, 0.07, 0.01};
-        double ic = 0;
-        for (int i = 0; i < latin.length; i++) {
-            latin[i] = latin[i] / 100.0;
-            ic += latin[i] * latin[i];
-        }
-    */
     IC_languages["Random text"] = 0.0385;
-
 
     argv[arg1] = "";
     delimitter = "";
     argv[arg2] = "0.002";
     delta = 0.002;
-
 }
 
 void IndexOfCoincidence::setArgs(const Args &args)
@@ -73,7 +66,6 @@ void IndexOfCoincidence::settingsUi(QWidget *parent)
         setArgs(dialog.args);
     }
 }
-
 
 QList<Page> IndexOfCoincidence::processPages(QList<Page> &pages){
 

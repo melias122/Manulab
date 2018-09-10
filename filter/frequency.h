@@ -1,8 +1,8 @@
 #ifndef FREQUENCE_H
 #define FREQUENCE_H
 
-#include "filter/interface.h"
-#include "filter/worker.h"
+#include "interface.h"
+
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QLabel>
@@ -81,8 +81,6 @@ private:
         int max_width;
         int offsets[10];
     };
-
-
-
 };
+
 #endif // FREQUENCE_H

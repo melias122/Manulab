@@ -1,11 +1,11 @@
 #ifndef PAGES_H
 #define PAGES_H
 
-#include "project/config.h"
-#include "project/page.h"
-#include "filter/filter.h"
+#include <QFutureWatcher>
 
-#include "qfuturewatcher.h"
+#include "config.h"
+#include "page.h"
+#include "filter/filter.h"
 
 class Pages : public QObject
 {

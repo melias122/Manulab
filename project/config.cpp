@@ -1,20 +1,18 @@
-#include "project/config.h"
+#include "config.h"
 
-#include "qstring.h"
-#include "qdir.h"
-#include "qfile.h"
-#include "qfileinfo.h"
-#include "qstandardpaths.h"
+#include <QString>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QStandardPaths>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDebug>
+#include <QDataStream>
+#include <QScopedPointer>
 
-#include "qjsondocument.h"
-#include "qjsonobject.h"
-#include "qjsonarray.h"
-
-#include "qdebug.h"
-#include "qdatastream.h"
-#include "qscopedpointer.h"
-
-#define j_config "config"
+#define j_config = "config"
 #define j_paths "paths"
 #define j_font "font"
 #define j_fontFamily "family"

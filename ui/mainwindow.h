@@ -1,14 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "qmainwindow.h"
+#include <QMainWindow>
+#include <QVBoxLayout>
 
 #include "project/pages.h"
 #include "project/config.h"
-#include "ui/thumbnaillabel.h"
-#include "ui/thumbnailslider.h"
-#include <QVBoxLayout>
+#include "thumbnaillabel.h"
+#include "thumbnailslider.h"
 #include "helpers/imagepool.h"
+
 #include <memory>
 
 namespace Ui
@@ -67,7 +68,7 @@ private:
 private:
     Ui::MainWindow *ui;
     Config *config{0};
-    std::unique_ptr<ImagePool> imgPool;// thumbnail
+    std::unique_ptr<ImagePool> imgPool; // thumbnail
     bool filterMode{true};
 
     thumbnailLabel *label = NULL;

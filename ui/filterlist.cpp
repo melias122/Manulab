@@ -1,10 +1,12 @@
-#include "ui/filterlist.h"
+#include "filterlist.h"
 
-#include "qevent.h"
-#include "qmimedata.h"
-#include "qdrag.h"
-#include "qdebug.h"
-#include "qlabel.h"
+#include <QtEvents>
+#include <QMimeData>
+#include <QDrag>
+#include <QDebug>
+#include <QLabel>
+
+#include "filter/filter.h"
 
 FilterList::FilterList(QWidget *parent)
 	: QListWidget(parent)

@@ -1,7 +1,8 @@
 #ifndef SEARCH_H
 #define SEARCH_H
 
-#include "filter/interface.h"
+#include "interface.h"
+
 #include <QLineEdit>
 #include <QPushButton>
 #include <QDir>

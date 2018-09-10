@@ -1,9 +1,9 @@
-#include "ui/imageviewer.h"
-#include <QDebug>
+#include "imageviewer.h"
 
-#include "qgraphicsitem.h"
-#include "qevent.h"
-#include "qmenu.h"
+#include <QDebug>
+#include <QGraphicsItem>
+#include <QtEvents>
+#include <QMenu>
 
 ImageViewer::ImageViewer(bool isContextualMenu, QWidget *parent)
 	: QGraphicsView(parent)

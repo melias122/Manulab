@@ -1,9 +1,9 @@
 #ifndef WORKER_H
 #define WORKER_H
 
-#include "qobject.h"
+#include <QObject>
 
-#include "filter/filter.h"
+#include "filter.h"
 #include "project/page.h"
 
 class worker : public QObject

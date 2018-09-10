@@ -3,6 +3,7 @@
 
 #include <QPixmap>
 #include <QMap>
+
 #include "project/config.h"
 
 class ImagePool
