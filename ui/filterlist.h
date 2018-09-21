@@ -3,8 +3,7 @@
 
 #include "qlistwidget.h"
 
-class FilterList : public QListWidget
-{
+class FilterList : public QListWidget {
 	Q_OBJECT
 
 public:

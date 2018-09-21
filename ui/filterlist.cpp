@@ -1,10 +1,10 @@
 #include "filterlist.h"
 
-#include <QtEvents>
-#include <QMimeData>
-#include <QDrag>
 #include <QDebug>
+#include <QDrag>
 #include <QLabel>
+#include <QMimeData>
+#include <QtEvents>
 
 #include "filter/filter.h"
 
@@ -24,7 +24,7 @@ FilterList::FilterList(QWidget *parent)
 	}
 	sortItems();
 
-//	itemDoubleClicked();
+	//	itemDoubleClicked();
 	connect(this, &FilterList::itemDoubleClicked, this, &FilterList::on_itemDoubleClicked);
 }
 

@@ -1,17 +1,17 @@
 #include "newproject.h"
 #include "ui_newproject.h"
 
+#include <QDebug>
 #include <QFileDialog>
+#include <QLayoutItem>
 #include <QSignalMapper>
 #include <QToolButton>
-#include <QLayoutItem>
-#include <QDebug>
 
 #include "project/config.h"
 
 NewProject::NewProject(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::NewProject)
+	: QDialog(parent)
+	, ui(new Ui::NewProject)
 {
 	ui->setupUi(this);
 	ui->tabWidget->tabBar()->hide();
@@ -118,7 +118,7 @@ void NewProject::createRecentPanel()
 {
 	QFile recentProjects(recentProjectsPath());
 
-	QVBoxLayout *layout = static_cast<QVBoxLayout*>(ui->recentFrame->layout());
+	QVBoxLayout *layout = static_cast<QVBoxLayout *>(ui->recentFrame->layout());
 
 	if (recentProjects.open(QIODevice::ReadOnly)) {
 
@@ -140,13 +140,12 @@ void NewProject::createRecentPanel()
 			recentProject->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 			recentProject->setStyleSheet(
 				"QToolButton{ color:white; background-color: rgb(91, 195, 184);border:none;}"
-				"QToolButton:hover{background-color: rgb(72, 154, 145);}"
-			);
+				"QToolButton:hover{background-color: rgb(72, 154, 145);}");
 			QFont font = recentProject->font();
 			font.setPointSize(10);
 			recentProject->setFont(font);
 
-			connect(recentProject, &QToolButton::clicked, [this, configPath] (){
+			connect(recentProject, &QToolButton::clicked, [this, configPath]() {
 				emit loadConfig(configPath);
 			});
 			layout->addWidget(recentProject);
@@ -204,7 +203,7 @@ void NewProject::createBlocks()
 	struct ProjectInfo {
 		QString configPath;
 		QString projectName;
-	//	QString projectDir;
+		//	QString projectDir;
 	};
 
 	QDir projectsDir(Config::defaultProjectsPath());
@@ -219,7 +218,7 @@ void NewProject::createBlocks()
 			ProjectInfo info;
 			info.configPath = path.absoluteFilePath();
 			info.projectName = dir;
-//			info.projectDir = projectsDir.absolutePath() + "/" + dir;
+			//			info.projectDir = projectsDir.absolutePath() + "/" + dir;
 
 			projects.append(info);
 		}

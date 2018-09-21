@@ -8,10 +8,8 @@
 
 // TODO: make separate class for ui fuctions with "builer/declarative" style
 
-class FilterInterface
-{
+class FilterInterface {
 public:
-
 	// Used for serialization
 	QString Name;
 
@@ -38,23 +36,23 @@ public:
 	// Args may be empty if filter does not contain any arguments.
 	Args getArgs() const { return argv; }
 
-	static FilterInterface* fromJson(const QJsonObject &o);
+	static FilterInterface *fromJson(const QJsonObject &o);
 	QJsonObject toJson();
 
 	// process does filter processing. Every filter must
 	// override it. Process is used in chain of filters and
 	// it should process any text. Text may be one line, whole page
 	// or chapter
-    virtual QString process(QString &text) = 0;
-    virtual QList<Page> processPages(QList<Page> &pages);
+	virtual QString process(QString &text) = 0;
+	virtual QList<Page> processPages(QList<Page> &pages);
 
 	// settingsUi fuction serves as entry point for user settings.
 	// Every filter that have arguments should override this fuction
-	virtual void settingsUi(QWidget*) {}
+	virtual void settingsUi(QWidget *) {}
 
 	// resultUi serves as result viewer after processing
 	// is done
-	virtual void resultUi(QWidget*) {}
+	virtual void resultUi(QWidget *) {}
 
 	// reset must be runned before filter are applyied on text
 	// so filters can init/reset they internal states.
@@ -62,8 +60,7 @@ public:
 	virtual void reset() {}
 
 	// UiFlag indicates Filter Ui capabilities
-	enum UiFlag
-	{
+	enum UiFlag {
 		none = 0x00,
 		settings = 0x01,
 		result = 0x02
@@ -73,7 +70,7 @@ public:
 	bool hasUi(UiFlag flag) { return (flag & uiFlag) == flag; }
 
 protected:
-	UiFlag uiFlag{none};
+	UiFlag uiFlag{ none };
 	Args argv;
 };
 

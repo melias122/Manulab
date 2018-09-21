@@ -9,8 +9,8 @@ Select::Select()
 {
 	uiFlag = UiFlag::settings;
 
-    argv[arg1] = "";
-    argv[arg2] = "";
+	argv[arg1] = "";
+	argv[arg2] = "";
 }
 
 void Select::setArgs(const Args &args)
@@ -21,23 +21,24 @@ void Select::setArgs(const Args &args)
 	to = argv[arg2].toString().toInt();
 }
 
-QList<Page> Select::processPages(QList<Page> &pages){
-    if(argv[arg1] == "" || argv[arg2]==""){
-        return pages;
-    }
-    QList<Page> retVal;
-    for (Page &page : pages) {
-        counter++;
-        if (counter >= from && counter <= to) {
-            retVal.append(page);
-        }
-    }
-    return retVal;
+QList<Page> Select::processPages(QList<Page> &pages)
+{
+	if (argv[arg1] == "" || argv[arg2] == "") {
+		return pages;
+	}
+	QList<Page> retVal;
+	for (Page &page : pages) {
+		counter++;
+		if (counter >= from && counter <= to) {
+			retVal.append(page);
+		}
+	}
+	return retVal;
 }
 
 QString Select::process(QString &text)
 {
-    return text;
+	return text;
 }
 
 void Select::settingsUi(QWidget *parent)

@@ -3,8 +3,7 @@
 
 #include "interface.h"
 
-class Reverse : public FilterInterface
-{
+class Reverse : public FilterInterface {
 public:
 	QString process(QString &text) override;
 };

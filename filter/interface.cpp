@@ -1,13 +1,13 @@
 #include "interface.h"
 
+#include <QDebug>
+#include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonValue>
-#include <QJsonArray>
-#include <QDebug>
 
 #include "filter.h"
 
-FilterInterface* FilterInterface::fromJson(const QJsonObject &o)
+FilterInterface *FilterInterface::fromJson(const QJsonObject &o)
 {
 	qDebug() << "FilterInterface::fromJson: reading" << o;
 
@@ -34,15 +34,16 @@ QJsonObject FilterInterface::toJson()
 	return o;
 }
 
-QList<Page> FilterInterface::processPages(QList<Page> &pages){
-    for (Page &page : pages) {
+QList<Page> FilterInterface::processPages(QList<Page> &pages)
+{
+	for (Page &page : pages) {
 
-        QString text = page.plainText();
-        text = process(text);
+		QString text = page.plainText();
+		text = process(text);
 
-        if (text != "") {
-            page.setPlainText(text);
-        }
-    }
-    return pages;
+		if (text != "") {
+			page.setPlainText(text);
+		}
+	}
+	return pages;
 }

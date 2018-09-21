@@ -15,4 +15,3 @@ QStringList ListView::stringList() const
 {
 	return m_model.stringList();
 }
-

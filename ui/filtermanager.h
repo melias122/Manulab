@@ -1,11 +1,10 @@
 #ifndef FILTERMANAGER_H
 #define FILTERMANAGER_H
 
-#include "qlistwidget.h"
 #include "filter/filter.h"
+#include "qlistwidget.h"
 
-class FilterManager : public QListWidget
-{
+class FilterManager : public QListWidget {
 	Q_OBJECT
 public:
 	FilterManager(QWidget *parent = 0);

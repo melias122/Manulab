@@ -7,7 +7,11 @@
 #include <QtConcurrent/QtConcurrent>
 
 struct Preload {
-	Preload(int index, int max = 5) : index(index), max(max) {}
+	Preload(int index, int max = 5)
+		: index(index)
+		, max(max)
+	{
+	}
 
 	void operator()(Page &page)
 	{
@@ -122,15 +126,15 @@ void Pages::on_plainText_changed(const QString &text)
 
 void Pages::on_workerFinished(const QList<Page> &pages)
 {
-    //setPages(pages);
-    //setIndex(0);
+	//setPages(pages);
+	//setIndex(0);
 	info("Filtering done");
 }
 
 void Pages::on_preload(int index)
 {
-//    m_pagePreloadWatcher->waitForFinished();
-//    m_pagePreloadWatcher->setFuture(QtConcurrent::map(m_pages, Preload(index, m_maxPagePreload)));
+	//    m_pagePreloadWatcher->waitForFinished();
+	//    m_pagePreloadWatcher->setFuture(QtConcurrent::map(m_pages, Preload(index, m_maxPagePreload)));
 }
 
 void Pages::setPages(const QList<Page> &pages) { m_pages = pages; }

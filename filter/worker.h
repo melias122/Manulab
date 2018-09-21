@@ -6,8 +6,7 @@
 #include "filter.h"
 #include "project/page.h"
 
-class worker : public QObject
-{
+class worker : public QObject {
 	Q_OBJECT
 public:
 	explicit worker(const QList<Page> &pages, const QList<Filter> &filters);

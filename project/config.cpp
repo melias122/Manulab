@@ -1,16 +1,16 @@
 #include "config.h"
 
-#include <QString>
+#include <QDataStream>
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QStandardPaths>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
-#include <QDebug>
-#include <QDataStream>
 #include <QScopedPointer>
+#include <QStandardPaths>
+#include <QString>
 
 #define j_config = "config"
 #define j_paths "paths"
@@ -203,7 +203,9 @@ bool Config::import(const QList<QString> &images, const QList<QString> &_texts)
 bool Config::createProjectDirTree(QString path)
 {
 	QString subdirs[] = {
-		"images", "images/thumbnails", "texts",
+		"images",
+		"images/thumbnails",
+		"texts",
 	};
 
 	QDir dir(path);

@@ -1,10 +1,10 @@
 #include "filtermanager.h"
 
-#include <qevent.h>
-#include <QMimeData>
-#include <QMenu>
-#include <QShortcut>
 #include <QDebug>
+#include <QMenu>
+#include <QMimeData>
+#include <QShortcut>
+#include <qevent.h>
 
 #include "filter/filter.h"
 
@@ -72,12 +72,12 @@ void FilterManager::showContextMenuForFilter(const QPoint &pos)
 	QMenu contextMenu("Context menu", this);
 
 	QAction remove("Remove", this);
-	connect(&remove, &QAction::triggered, [=](){ removeFilter(row(item)); });
+	connect(&remove, &QAction::triggered, [=]() { removeFilter(row(item)); });
 	contextMenu.addAction(&remove);
 
 	QAction edit("Edit", this);
 	if (filter->hasUi(FilterInterface::UiFlag::settings)) {
-		connect(&edit, &QAction::triggered, [=](){
+		connect(&edit, &QAction::triggered, [=]() {
 			mFilters[row(item)]->settingsUi(this);
 		});
 		contextMenu.addAction(&edit);
@@ -85,7 +85,7 @@ void FilterManager::showContextMenuForFilter(const QPoint &pos)
 
 	QAction result("Result", this);
 	if (filter->hasUi(FilterInterface::UiFlag::result)) {
-		connect(&result, &QAction::triggered, [=](){
+		connect(&result, &QAction::triggered, [=]() {
 			mFilters[row(item)]->resultUi(this);
 		});
 		contextMenu.addAction(&result);
@@ -139,7 +139,8 @@ void FilterManager::dragEnterEvent(QDragEnterEvent *event)
 }
 
 void FilterManager::dragMoveEvent(QDragMoveEvent *event)
-{}
+{
+}
 
 void FilterManager::startDrag(Qt::DropActions)
 {

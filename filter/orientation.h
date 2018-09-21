@@ -23,10 +23,8 @@
 //		<-
 //
 
-class Orientation : public FilterInterface
-{
+class Orientation : public FilterInterface {
 public:
-
 	enum Horizontal {
 		LeftToRight, // ->
 		RightToLeft // <-
@@ -38,7 +36,7 @@ public:
 	};
 
 	Orientation();
-    QList<Page> processPages(QList<Page> &pages) override;
+	QList<Page> processPages(QList<Page> &pages) override;
 	QString process(QString &text) override;
 	void settingsUi(QWidget *parent) override;
 

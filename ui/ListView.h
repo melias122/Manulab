@@ -4,8 +4,7 @@
 #include <QListView>
 #include <QStringListModel>
 
-class ListView : public QListView
-{
+class ListView : public QListView {
 	Q_OBJECT
 
 public:

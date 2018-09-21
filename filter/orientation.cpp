@@ -1,11 +1,11 @@
 #include "orientation.h"
 
-#include <algorithm>
-#include <QDialog>
 #include <QComboBox>
+#include <QDialog>
 #include <QLayout>
-#include <QPushButton>
 #include <QObject>
+#include <QPushButton>
+#include <algorithm>
 
 QString Orientation::arg1 = "Horizontal";
 QString Orientation::arg2 = "Vertical";
@@ -18,21 +18,22 @@ Orientation::Orientation()
 	argv[arg2] = Vertical::UpToDown;
 }
 
-QList<Page> Orientation::processPages(QList<Page> &pages){
+QList<Page> Orientation::processPages(QList<Page> &pages)
+{
 
-    QList<Page> retVal;
-    for (Page &page : pages) {
-        QString text;
-        text.append(page.plainText());
-        page.setPlainText(text);
-        retVal.append(page);
-    }
-    Horizontal h = Horizontal(argv[arg1].toInt());
-    if (h == Horizontal::RightToLeft) {
-        std::reverse(retVal.begin(), retVal.end());
-    }
+	QList<Page> retVal;
+	for (Page &page : pages) {
+		QString text;
+		text.append(page.plainText());
+		page.setPlainText(text);
+		retVal.append(page);
+	}
+	Horizontal h = Horizontal(argv[arg1].toInt());
+	if (h == Horizontal::RightToLeft) {
+		std::reverse(retVal.begin(), retVal.end());
+	}
 
-    return retVal;
+	return retVal;
 }
 
 QString Orientation::process(QString &text)
@@ -93,4 +94,3 @@ void Orientation::settingsUi(QWidget *parent)
 		argv[arg2] = vertical.currentData().toInt();
 	}
 }
-

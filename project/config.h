@@ -1,14 +1,13 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <QObject>
 #include <QFont>
+#include <QObject>
 
-#include "path.h"
 #include "page.h"
+#include "path.h"
 
-class Config
-{
+class Config {
 
 public:
 	explicit Config() {}
@@ -37,7 +36,6 @@ public:
 	QString projectName() const { return mProjectDir.split("/").last(); }
 	QString absoulteProjectPath() const { return mProjectDir; }
 
-
 private:
 	bool createProject(const QString &projectName, QString defaultPath = Config::defaultProjectsPath());
 	bool import(const QList<QString> &images, const QList<QString> &_texts);
@@ -52,7 +50,7 @@ private:
 	// | |---- text/
 	// | |---- ...
 	bool createProjectDirTree(QString path);
-//	bool createIcon();
+	//	bool createIcon();
 
 private:
 	Q_DISABLE_COPY(Config)
@@ -64,4 +62,4 @@ private:
 	QFont m_font;
 };
 
-#endif  // CONFIG_H
+#endif // CONFIG_H

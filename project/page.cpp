@@ -3,11 +3,11 @@
 #include "config.h"
 
 #include <QFile>
-#include <QTextStream>
 #include <QPixmapCache>
+#include <QTextStream>
 
 Page::Page(const Path *path)
-    : m_path(path)
+	: m_path(path)
 {
 	Q_ASSERT(path != nullptr);
 
@@ -26,14 +26,15 @@ void Page::setPlainText(const QString &text) { m_text = text; }
 
 int Page::index() const { return m_path->index(); }
 
-QPixmap Page::image() const {
-    QPixmap pix;
+QPixmap Page::image() const
+{
+	QPixmap pix;
 	QString img = m_path->image();
-    if (!QPixmapCache::find(img, &pix)) {
-        pix.load(img);
-        QPixmapCache::insert(img, pix);
-    }
-    return pix;
+	if (!QPixmapCache::find(img, &pix)) {
+		pix.load(img);
+		QPixmapCache::insert(img, pix);
+	}
+	return pix;
 }
 
 void Page::save()

@@ -3,8 +3,7 @@
 
 #include "interface.h"
 
-class Substitution : public FilterInterface
-{
+class Substitution : public FilterInterface {
 public:
 	Substitution();
 	QString process(QString &text) override;

@@ -1,14 +1,14 @@
 #include "settingsDialog.h"
 
-#include <QObject>
-#include <QWidget>
-#include <QPushButton>
 #include <QBoxLayout>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QDialogButtonBox>
 #include <QLayout>
 #include <QLineEdit>
-#include <QDialogButtonBox>
-#include <QComboBox>
-#include <QCheckBox>
+#include <QObject>
+#include <QPushButton>
+#include <QWidget>
 
 settingsDialog::settingsDialog(QWidget *parent)
 	: QDialog(parent)
@@ -40,30 +40,26 @@ void settingsDialog::addLineEdit(const QString &argName, const QVariant &argValu
 
 void settingsDialog::addCheckBox(const QString &argName, const QVariant &argValue, const QString &desc)
 {
-    // set previous value
-    args[argName] = argValue;
+	// set previous value
+	args[argName] = argValue;
 
-    // create lineEdit
-    QCheckBox *checkBox = new QCheckBox(desc, this);
+	// create lineEdit
+	QCheckBox *checkBox = new QCheckBox(desc, this);
 
-    if( argValue.toBool() )
-    {
-        checkBox->setChecked(true);
-    }
-    else
-    {
-        checkBox->setChecked(false);
-    }
+	if (argValue.toBool()) {
+		checkBox->setChecked(true);
+	} else {
+		checkBox->setChecked(false);
+	}
 
-    // add checkBox to layout
-    layout()->addWidget(checkBox);
+	// add checkBox to layout
+	layout()->addWidget(checkBox);
 
-    // edit arg
+	// edit arg
 
-    connect(checkBox, &QCheckBox::stateChanged, [=](const bool checked)
-    {
-        args[argName] = (checked) ? "true" : "false";
-    });
+	connect(checkBox, &QCheckBox::stateChanged, [=](const bool checked) {
+		args[argName] = (checked) ? "true" : "false";
+	});
 }
 
 //void settingsDialog::addComboBox(const QString &label, const QStringList &argNames, const QVariantList &argValues)

@@ -3,13 +3,13 @@
 #include <QThread>
 
 #include "project/pages.h"
-#include "ui/newproject.h"
 #include "ui/mainwindow.h"
+#include "ui/newproject.h"
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-  QApplication::setGraphicsSystem("raster");
+	QApplication::setGraphicsSystem("raster");
 #endif
 	QApplication a(argc, argv);
 
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 	QObject::connect(&pages, &Pages::pageChanged, &w, &MainWindow::on_pageChanged);
 
 	// NewProject connections
-	QObject::connect(&w, &MainWindow::openProjectManager, [&w, &pages](){
+	QObject::connect(&w, &MainWindow::openProjectManager, [&w, &pages]() {
 		NewProject project;
 		QObject::connect(&project, &NewProject::configChanged, &w, &MainWindow::on_configChanged);
 		QObject::connect(&project, &NewProject::configChanged, &pages, &Pages::on_configChanged);

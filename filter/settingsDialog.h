@@ -5,13 +5,12 @@
 
 #include <QDialog>
 
-class settingsDialog : public QDialog
-{
+class settingsDialog : public QDialog {
 	Q_OBJECT
 public:
 	explicit settingsDialog(QWidget *parent);
 	void addLineEdit(const QString &argName, const QVariant &argValue);
-    void addCheckBox(const QString &argName, const QVariant &argValue, const QString &desc);
+	void addCheckBox(const QString &argName, const QVariant &argValue, const QString &desc);
 	void addComboBox(const QString &label, const QStringList &argNames, const QVariantList &argValues);
 
 public slots:

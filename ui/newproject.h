@@ -2,8 +2,8 @@
 #define NEWPROJECT_H
 
 #include <QDialog>
-#include <QIcon>
 #include <QFileDialog>
+#include <QIcon>
 
 #include "project/pages.h"
 
@@ -11,13 +11,12 @@ namespace Ui {
 class NewProject;
 }
 
-class NewProject : public QDialog
-{
-    Q_OBJECT
+class NewProject : public QDialog {
+	Q_OBJECT
 
 public:
-    explicit NewProject(QWidget *parent = 0);
-    ~NewProject();
+	explicit NewProject(QWidget *parent = 0);
+	~NewProject();
 
 signals:
 	void configChanged(Config *config);
@@ -39,10 +38,10 @@ private:
 	void createBlocks();
 	QIcon getIcon(const QString &path, const QSize iconSize);
 
-	QString recentProjectsPath() const {return Config::applicationDataPath() + "/recentProjects"; }
+	QString recentProjectsPath() const { return Config::applicationDataPath() + "/recentProjects"; }
 
 private:
-    Ui::NewProject *ui;
+	Ui::NewProject *ui;
 };
 
 #endif // NEWPROJECT_H

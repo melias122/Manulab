@@ -7,8 +7,7 @@
 
 using Filter = std::shared_ptr<FilterInterface>;
 
-class FilterFactory
-{
+class FilterFactory {
 	friend class FilterInterface;
 
 public:
@@ -18,11 +17,11 @@ public:
 private:
 	static FilterInterface *ptr_create(const QString &name);
 
-	using NewFilter = FilterInterface* (*)();
+	using NewFilter = FilterInterface *(*)();
 	static QHash<QString, NewFilter> factory;
 };
 
 QByteArray filtersToJson(const QList<Filter> &filters);
 QList<Filter> filtersFromJson(const QByteArray &json);
 
-#endif  // FILTER
+#endif // FILTER

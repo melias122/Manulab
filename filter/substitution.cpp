@@ -16,7 +16,6 @@ Substitution::Substitution()
 	argv[arg2] = QString();
 }
 
-
 QString Substitution::process(QString &text)
 {
 	auto pattern = QRegularExpression(argv[arg1].toString());

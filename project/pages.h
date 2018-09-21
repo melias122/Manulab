@@ -4,11 +4,10 @@
 #include <QFutureWatcher>
 
 #include "config.h"
-#include "page.h"
 #include "filter/filter.h"
+#include "page.h"
 
-class Pages : public QObject
-{
+class Pages : public QObject {
 	Q_OBJECT
 public:
 	explicit Pages();
@@ -38,12 +37,12 @@ private:
 	void setPages(const QList<Page> &pages);
 
 private:
-	int m_index{0};
-	Config *m_config{0};
+	int m_index{ 0 };
+	Config *m_config{ 0 };
 
-	int m_maxPagePreload{5};
-	QFutureWatcher<void> *m_pagePreloadWatcher{new QFutureWatcher<void>};
+	int m_maxPagePreload{ 5 };
+	QFutureWatcher<void> *m_pagePreloadWatcher{ new QFutureWatcher<void> };
 	QList<Page> m_pages;
 };
 
-#endif  // PAGES_H
+#endif // PAGES_H

@@ -5,8 +5,7 @@
 
 class QJsonObject;
 
-class Path
-{
+class Path {
 	friend class Config;
 
 public:

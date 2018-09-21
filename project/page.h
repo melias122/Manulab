@@ -1,14 +1,13 @@
 #ifndef PAGE_H
 #define PAGE_H
 
-#include <QString>
 #include <QPixmap>
 #include <QPixmapCache>
+#include <QString>
 
 class Path;
 
-class Page
-{
+class Page {
 	friend class Pages;
 
 public:
