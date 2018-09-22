@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.4.0 FATAL_ERROR)
 
 project(ManuLab)
 
-# Find includes in corresponding build directories
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
 # Instruct CMake to run moc automatically when needed
 set(CMAKE_AUTOMOC ON)
 
@@ -17,7 +14,10 @@ set(CMAKE_AUTORCC ON)
 # TODO: Get rid of this..
 set(CMAKE_CXX_FLAGS "-std=c++11")
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+# Export compile commands for tools that need it
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 include(clangformat)
 

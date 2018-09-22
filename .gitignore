@@ -34,7 +34,7 @@ ui_*.h
 *.qmlc
 *.jsc
 Makefile*
-*build-*
+*build*
 
 # Qt unit tests
 target_wrapper.*
@@ -50,4 +50,6 @@ target_wrapper.*
 # QtCtreator CMake
 CMakeLists.txt.user*
 
-build
+.cquery*
+.ccls*
+compile_commands.json

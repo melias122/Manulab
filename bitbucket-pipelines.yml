@@ -1,0 +1,8 @@
+image: melias122/manulab:latest
+
+pipelines:
+  default:
+    - step:
+        script:
+          - cmake -H. -Bbuild
+          - cmake --build build
