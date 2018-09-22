@@ -8,8 +8,6 @@
 
 class ImagePool {
 public:
-	QPixmap getImage(int index);
-	void reset();
 	ImagePool(Config *con)
 	{
 		config = con;
@@ -18,6 +16,9 @@ public:
 	{
 		reset();
 	}
+
+	QPixmap getImage(int index);
+	void reset();
 
 private:
 	Config *config{ 0 };

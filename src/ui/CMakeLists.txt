@@ -18,6 +18,6 @@ add_library(ui
 	thumbnailslider.cpp
 	thumbnailslider.h)
 
-target_link_libraries(ui PRIVATE Qt5::Widgets)
+target_link_libraries(ui PRIVATE Qt5::Widgets helpers)
 
 add_clangformat(ui)

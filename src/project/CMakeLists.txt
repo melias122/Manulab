@@ -8,6 +8,6 @@ add_library(project
 	path.cpp
 	path.h)
 
-target_link_libraries(project PRIVATE Qt5::Widgets)
+target_link_libraries(project PRIVATE Qt5::Widgets filter)
 
 add_clangformat(project)
