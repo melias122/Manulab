@@ -30,22 +30,5 @@ endif()
 
 find_package(Qt5 COMPONENTS Core Widgets CONFIG REQUIRED)
 
-add_subdirectory(filter)
-add_subdirectory(helpers)
-add_subdirectory(project)
-add_subdirectory(ui)
-
-add_executable(manulab
-	main.cpp
-	resources/icons.qrc)
-
-target_include_directories(manulab PRIVATE .)
-
-target_link_libraries(manulab
-	Qt5::Widgets
-	filter
-	helpers
-	project
-	ui)
-
-add_clangformat(manulab)
+include_directories(src)
+add_subdirectory(src)

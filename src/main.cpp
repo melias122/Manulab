@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 
 	// init resources
-	Q_INIT_RESOURCE(icons);
+	Q_INIT_RESOURCE(resources);
 
 	// register types
 	qRegisterMetaType<QList<Filter>>("QList<Filter>");
