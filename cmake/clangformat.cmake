@@ -16,7 +16,7 @@ function(add_clangformat cf_target)
 		get_target_property(cf_builddir ${cf_target} BINARY_DIR)
 
 		set(cf_stamps "")
-		set(cf_cpp_extensions .c .cc .cpp .c++ .cxx .C)
+		set(cf_cpp_extensions .c .cc .cpp .c++ .cxx .C .h .hh .hpp .h++ .hxx .H)
 
 		# we will apply clang-format for every file in target
 		foreach(cf_target_source ${cf_target_sources})
