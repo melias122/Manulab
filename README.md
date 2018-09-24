@@ -1,5 +1,14 @@
 # ManuLab: a Manuscript Laboratory
-ManuLab is universal application for loading, processing and analysis of historical manuscripts.
+
+ManuLab is a software product for statistical
+analysis of encrypted historical manuscripts. The
+document analysis is performed via a chain of filters
+(main building elements). A filter represents
+any operation realizable on a document transcription
+divided into a set of pages. 
+The software design also includes document visualization,
+displaying pairs of manuscript pages
+with corresponding transcriptions.
 
 This README is being writen.
 
